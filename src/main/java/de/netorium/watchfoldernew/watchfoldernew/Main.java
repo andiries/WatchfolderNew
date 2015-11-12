@@ -26,6 +26,7 @@ public class Main {
         String dirToWatch = "d:\\JOBS-Folder\\WatchfolderNewTest";
         
         IOFileFilter recursive = null;
+        //TODO What's about the IOFileFilter
         //recursive = FileFilterUtils.fileFileFilter();
         
         FileAlterationObserver fileAlterationObserver
