@@ -8,6 +8,7 @@ package de.netorium.watchfoldernew.watchfoldernew;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.slf4j.LoggerFactory;
@@ -26,12 +27,10 @@ public class Main {
         //String dirToWatch = "d:\\JOBS-Folder\\WatchfolderNewTest";
         String dirToWatch = "/Users/andreasries/tmp/WatchfolderNewTest";
         
-        IOFileFilter recursive = null;
-        //TODO What's about the IOFileFilter
-        //recursive = FileFilterUtils.fileFileFilter();
+        IOFileFilter filter  = FileFilterUtils.and(FileFilterUtils.fileFileFilter(), HiddenFileFilter.VISIBLE);
         
         FileAlterationObserver fileAlterationObserver
-                        = new FileAlterationObserver(dirToWatch, recursive);
+                        = new FileAlterationObserver(dirToWatch, filter);
         
         fileAlterationObserver.addListener(new FileMonitor());
         try {

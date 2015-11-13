@@ -111,7 +111,7 @@ public class FileMonitor implements FileAlterationListener{
             stringBuilder.append(" length: ").append(file.length());
             stringBuilder.append(System.lineSeparator());
             Date lastModofied = new Date(file.lastModified());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSS");
             String lastModifiedString = simpleDateFormat.format(lastModofied);
             stringBuilder.append(" lastModified: ").append(lastModifiedString);
             stringBuilder.append(System.lineSeparator());
