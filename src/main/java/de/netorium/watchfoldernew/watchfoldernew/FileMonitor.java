@@ -7,6 +7,8 @@ package de.netorium.watchfoldernew.watchfoldernew;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
@@ -35,6 +37,8 @@ public class FileMonitor implements FileAlterationListener{
     private void createFileEventInterpreter() {
         if (SystemUtils.IS_OS_WINDOWS)
             fileEventInterpreter = new NtfsFileEventInterpreter();
+        else if (SystemUtils.IS_OS_MAC_OSX)
+            fileEventInterpreter = new HfsFileEventInterpreter();
         else
             fileEventInterpreter = new GenericFileEventInterpreter();
     }
@@ -106,7 +110,10 @@ public class FileMonitor implements FileAlterationListener{
             stringBuilder.append(System.lineSeparator());
             stringBuilder.append(" length: ").append(file.length());
             stringBuilder.append(System.lineSeparator());
-            stringBuilder.append(" lastModified: ").append(file.lastModified());
+            Date lastModofied = new Date(file.lastModified());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            String lastModifiedString = simpleDateFormat.format(lastModofied);
+            stringBuilder.append(" lastModified: ").append(lastModifiedString);
             stringBuilder.append(System.lineSeparator());
             stringBuilder.append(" name: ").append(file.getName());
         } catch (IOException ex) {

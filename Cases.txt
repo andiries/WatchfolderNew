@@ -1,0 +1,29 @@
+copy to watchfolder through finder - small file
+copy to watchfolder through finder - big file
+
+copy to watchfolder through terminal - small file
+copy to watchfolder through terminal - big file
+
+copy to watchfolder through ftp - small file
+copy to watchfolder through ftp - big file
+
+change date through terminal (touch) - small file
+change date through terminal (touch) - big file
+
+change size through terminal (echo "" >>) - small file
+change size through terminal (echo "" >>) - big file
+
+change size through editor - small file
+change size through editor - big file
+
+rename through finder - small file
+rename through finder - big file
+
+rename through terminal (move) - small file
+rename through terminal (move) - big file
+
+delete through finder - small file
+delete through finder - big file
+
+delete through terminal (rm) - small file
+delete through terminal (rm) - big file
