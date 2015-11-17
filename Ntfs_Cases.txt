@@ -1,0 +1,42 @@
+copy to watchfolder through explorer - small file - CREATED
+copy to watchfolder through explorer - big file - CREATED at start. CHANGED, after copying finished. In CREATED event lastModified is actual date, In CHANGED event, lastModified is the sources lastModified
+
+
+copy to watchfolder through terminal (copy) - small file - CREATED
+copy to watchfolder through terminal (copy) - big file - CREATED at start. CHANGED, after copying finished. In CREATED event lastModified is actual date, In CHANGED event, lastModified is the sources lastModified
+
+
+??? copy to watchfolder through ftp (command line client mac) - small file - CREATED
+??? copy to watchfolder through ftp - big file - CREATED and n times CHANGED. lastModified is actual date, until last Changed. There it is the sources lastModified. Resulting lastModified of file is the sources lastModified
+
+
+change date through terminal (touch) - small file - CHANGED
+change date through terminal (touch) - big file - CHANGED
+
+
+change size through terminal (echo "" >>) - small file - CHANGED
+change size through terminal (echo "" >>) - big file - CHANGED
+
+
+change size through editor - small file - CHANGED
+change size through editor - big file - ???
+
+
+rename through explorer - small file - DELETED on old filename, CREATED on new filename in undefined order. lastModified on new file is actual date
+rename through explorer - big file - same as small file
+
+
+rename through terminal (move) - small file - DELETED on old filename, CREATED on new filename in undefined order. lastModified on new file is unchanged
+rename through terminal (move) - big file - same as small file
+
+
+delete through explorer - small file - DELETED
+delete through explorer - big file - DELETED
+
+
+delete through terminal (del) - small file - DELETED
+delete through terminal (del) - big file - DELETED
+
+
+delete through terminal (move) - small file - DELETED
+delete through terminal (move) - big file - DELETED after moce finished

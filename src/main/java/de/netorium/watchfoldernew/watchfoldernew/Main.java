@@ -24,8 +24,8 @@ public class Main {
     public static void main(String[] args) {
         
         logger.info("Starting program ...");
-        //String dirToWatch = "d:\\JOBS-Folder\\WatchfolderNewTest";
-        String dirToWatch = "/Users/andreasries/tmp/WatchfolderNewTest";
+        String dirToWatch = "d:\\JOBS-Folder\\WatchfolderNewTest";
+        //String dirToWatch = "/Users/andreasries/tmp/WatchfolderNewTest";
         
         IOFileFilter filter  = FileFilterUtils.and(FileFilterUtils.fileFileFilter(), HiddenFileFilter.VISIBLE);
         

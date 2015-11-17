@@ -10,7 +10,7 @@ public class NtfsFileEventInterpreter implements FileEventInterpreter {
 
     @Override
     public SpiedFileEvaluationResult evaluateSpiedFile(SpiedFile spiedFile) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return SpiedFileEvaluationResult.NOT_EVALUATED;
     }
     
 }
