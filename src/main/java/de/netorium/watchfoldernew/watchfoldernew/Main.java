@@ -11,6 +11,7 @@ import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.monitor.FileAlterationObserver;
+import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -24,9 +25,13 @@ public class Main {
     public static void main(String[] args) {
         
         logger.info("Starting program ...");
-        String dirToWatch = "d:\\JOBS-Folder\\WatchfolderNewTest";
-        //String dirToWatch = "/Users/andreasries/tmp/WatchfolderNewTest";
-        
+
+        String dirToWatch = "";
+        if (SystemUtils.IS_OS_WINDOWS)
+            dirToWatch = "d:\\JOBS-Folder\\WatchfolderNewTest";
+        else if (SystemUtils.IS_OS_MAC_OSX)
+            dirToWatch = "/Users/andreasries/tmp/WatchfolderNewTest";
+                
         IOFileFilter filter  = FileFilterUtils.and(FileFilterUtils.fileFileFilter(), HiddenFileFilter.VISIBLE);
         
         FileAlterationObserver fileAlterationObserver
