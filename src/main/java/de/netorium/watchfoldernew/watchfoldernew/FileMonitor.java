@@ -63,37 +63,61 @@ public class FileMonitor implements FileAlterationListener{
     public void onFileCreate(File file) {
         logger.info("Filesystem FileCreate event:\n{}", fileToString(file));
         
-        SpiedFile spiedFile;
-        if (spiedFiles.containsKey(file.getAbsolutePath()))
-        {
-            spiedFile = spiedFiles.get(file.getAbsolutePath());
-            spiedFile.addEvent(file, OperatingSystemFileEvent.CREATED);
-        }
-        else
-        {
-            spiedFile = new SpiedFile();
-            spiedFile.addEvent(file, OperatingSystemFileEvent.CREATED);
-            spiedFiles.put(file.getAbsolutePath(), spiedFile);
-        }
+        SpiedFile spiedFile = addFileEvent(file, OperatingSystemFileEvent.CREATED);
         
         SpiedFileEvaluationResult evaluationResult = 
             fileEventInterpreter.evaluateSpiedFile(spiedFile);
         
-        //TODO act according to evaluationResult
+        handleEvaluationResult(evaluationResult);
     }
 
     @Override
     public void onFileChange(File file) {
         logger.info("Filesystem FileChange event:\n{}", fileToString(file));
+        
+        SpiedFile spiedFile = addFileEvent(file, OperatingSystemFileEvent.CHANGED);
+        
+        SpiedFileEvaluationResult evaluationResult = 
+            fileEventInterpreter.evaluateSpiedFile(spiedFile);
+        
+        handleEvaluationResult(evaluationResult);
     }
 
     @Override
     public void onFileDelete(File file) {
         logger.info("Filesystem FileDelete event:\n{}", fileToString(file));
+        
+        SpiedFile spiedFile = addFileEvent(file, OperatingSystemFileEvent.DELETED);
+        
+        SpiedFileEvaluationResult evaluationResult = 
+            fileEventInterpreter.evaluateSpiedFile(spiedFile);
+        
+        handleEvaluationResult(evaluationResult);
     }
 
     @Override
     public void onStop(FileAlterationObserver fao) {
+    }
+    
+    private SpiedFile addFileEvent(File file, OperatingSystemFileEvent osFileEvent) {
+        SpiedFile spiedFile;
+        if (spiedFiles.containsKey(file.getAbsolutePath()))
+        {
+            spiedFile = spiedFiles.get(file.getAbsolutePath());
+            spiedFile.addEvent(file, osFileEvent);
+        }
+        else
+        {
+            spiedFile = new SpiedFile(file.getAbsolutePath());
+            spiedFile.addEvent(file, osFileEvent);
+            spiedFiles.put(file.getAbsolutePath(), spiedFile);
+        }
+        return spiedFile;
+    }
+    
+    private void handleEvaluationResult(SpiedFileEvaluationResult evaluationResult) {
+        //TODO implement
+    
     }
     
     private static String fileToString(File file)

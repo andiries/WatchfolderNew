@@ -1,6 +1,10 @@
 package de.netorium.watchfoldernew.watchfoldernew;
 
 import java.io.File;
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,31 +18,50 @@ import java.io.File;
  */
 public class SpiedFile {
 
+    public static class FileEventData {
+
+        public FileEventData(File file, OperatingSystemFileEvent fileEvent) {
+            this.file = file;
+            this.fileEvent = fileEvent;
+        }
+          
+        private File file;
+
+        public File getFile() {
+            return file;
+        }
+
+        public void setFile(File file) {
+            this.file = file;
+        }
+      
+        private OperatingSystemFileEvent fileEvent;
+
+        public OperatingSystemFileEvent getFileEvent() {
+            return fileEvent;
+        }
+
+        public void setFileEvent(OperatingSystemFileEvent fileEvent) {
+            this.fileEvent = fileEvent;
+        }
+    }
+    
+    private final List<FileEventData> fileEvents = new ArrayList<>();
+    private String absolutePath;
+    
+    public SpiedFile(String absolutePath) {
+        this.absolutePath = absolutePath;
+    }
+
     public void addEvent(File file, OperatingSystemFileEvent osFileEvent)
     {
-        //TODO save information of file:
-        //EventType
+        if (!file.getAbsolutePath().equals(absolutePath))
+        {
+            String message = String.format("FileEvent of file %s does not fit to SpiedFile %s", file.getAbsolutePath(),
+                    absolutePath);
+            throw new InvalidParameterException();
+        }
+        
+        fileEvents.add(new FileEventData(file, osFileEvent));
     }
-    
-        private String AbsolutePath;
-
-    /**
-     * Get the value of AbsolutePath
-     *
-     * @return the value of AbsolutePath
-     */
-    public String getAbsolutePath() {
-        return AbsolutePath;
-    }
-
-    /**
-     * Set the value of AbsolutePath
-     *
-     * @param AbsolutePath new value of AbsolutePath
-     */
-    public void setAbsolutePath(String AbsolutePath) {
-        this.AbsolutePath = AbsolutePath;
-    }
-
-    
 }
